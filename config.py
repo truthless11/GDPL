@@ -85,7 +85,6 @@ class MultiWozConfig(Config):
         self.eu_dim = 150
         self.max_ulen = 20
         self.alpha = 0.01
-        self.hz_dim = 50 # for auto module
         self.hi_dim = 50 # for airl module
         
         self.mapping = {'restaurant': {'addr': 'address', 'area': 'area', 'food': 'food', 'name': 'name', 'phone': 'phone', 'post': 'postcode', 'price': 'pricerange'},

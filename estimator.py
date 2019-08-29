@@ -42,9 +42,7 @@ class RewardEstimator(object):
         elif not inference:
             self.data_train = manager.create_dataset_irl('train', args.batchsz, config, db)
             self.data_valid = manager.create_dataset_irl('valid', args.batchsz, config, db)
-            self.auto_iter = iter(self.data_train)
             self.irl_iter = iter(self.data_train)
-            self.auto_iter_valid = iter(self.data_valid)
             self.irl_iter_valid = iter(self.data_valid)
         
     def kl_divergence(self, mu, logvar, istrain):
@@ -256,9 +254,9 @@ class AIRL(nn.Module):
     
     def forward(self, s, a, next_s):
         """
-        :param s: [b, hz_dim]
-        :param a: [b, hz_dim]
-        :param next_s: [b, hz_dim]
+        :param s: [b, s_dim]
+        :param a: [b, a_dim]
+        :param next_s: [b, s_dim]
         :return:  [b, 1]
         """
         weights = self.g(torch.cat([s,a], -1)) + self.gamma * self.h(next_s) - self.h(s)

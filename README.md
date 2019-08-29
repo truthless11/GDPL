@@ -1,5 +1,5 @@
 # GDPL
-Codes for the paper "Guided Dialog Policy Learning: Reward Estimation for Multi-Domain Task-Oriented Dialog"
+Codes for the paper "Guided Dialog Policy Learning: Reward Estimation for Multi-Domain Task-Oriented Dialog", and you can find our paper at [arxiv](https://arxiv.org/abs/1908.10719)
 
 Cite this paper :
 
@@ -34,21 +34,20 @@ Change the corresponding options to set hyper-parameters:
 parser.add_argument('--log_dir', type=str, default='log', help='Logging directory')
 parser.add_argument('--data_dir', type=str, default='data', help='Data directory')
 parser.add_argument('--save_dir', type=str, default='model', help='Directory to store model')
-parser.add_argument('--epoch', type=int, default=32, help='Max number of epoch')
-parser.add_argument('--save_per_epoch', type=int, default=5, help="Save model every XXX epoches")
 parser.add_argument('--load', type=str, default='', help='File name to load trained model')
 parser.add_argument('--load_user', type=str, default='', help='File name to load user simulator')
 parser.add_argument('--pretrain', type=bool, default=False, help='Set to pretrain')
 parser.add_argument('--test', type=bool, default=False, help='Set to inference')
-
 parser.add_argument('--config', type=str, default='multiwoz', help='Dataset to use')
 parser.add_argument('--simulator', type=str, default='agenda', help='User simulator to use')
+
+parser.add_argument('--epoch', type=int, default=32, help='Max number of epoch')
+parser.add_argument('--save_per_epoch', type=int, default=5, help="Save model every XXX epoches")
 parser.add_argument('--process', type=int, default=16, help='Process number')
 parser.add_argument('--batchsz', type=int, default=32, help='Batch size')
 parser.add_argument('--batchsz_traj', type=int, default=1024, help='Batch size to collect trajectories')
 parser.add_argument('--print_per_batch', type=int, default=400, help="Print log every XXX batches")
 parser.add_argument('--update_round', type=int, default=5, help='Epoch num for inner loop of PPO')
-parser.add_argument('--lr_auto', type=float, default=1e-3, help='Learning rate of autoencoder')
 parser.add_argument('--lr_rl', type=float, default=3e-4, help='Learning rate of dialog policy')
 parser.add_argument('--lr_irl', type=float, default=1e-3, help='Learning rate of reward estimator')
 parser.add_argument('--lr_simu', type=float, default=1e-3, help='Learning rate of user simulator')

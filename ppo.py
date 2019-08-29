@@ -303,27 +303,21 @@ class PPO(object):
         next_s = torch.from_numpy(np.stack(batch.next_state)).to(device=DEVICE)
         mask = torch.Tensor(np.stack(batch.mask)).to(device=DEVICE)
         batchsz = s.size(0)
-
-        # 2. update auto encoder & decoder
-#        if backward:
-#            self.rewarder.update_auto(batchsz, epoch)
-#        else:
-#            best[0] = self.rewarder.update_auto(batchsz, epoch, best[0])
         
-        # 3. update reward estimator
+        # 2. update reward estimator
         inputs = (s, a, next_s)
         if backward:
             self.rewarder.update_irl(inputs, batchsz, epoch)
         else:
             best[1] = self.rewarder.update_irl(inputs, batchsz, epoch, best[1])
             
-        # 4. get estimated V(s) and PI_old(s, a)
+        # 3. get estimated V(s) and PI_old(s, a)
         # actually, PI_old(s, a) can be saved when interacting with env, so as to save the time of one forward elapsed
         # v: [b, 1] => [b]
         v = self.value(s).squeeze(-1).detach()
         log_pi_old_sa = self.policy.get_log_prob(s, a).detach()
         
-        # 5. estimate advantage and v_target according to GAE and Bellman Equation
+        # 4. estimate advantage and v_target according to GAE and Bellman Equation
         r = self.rewarder.estimate(s, a, next_s, log_pi_old_sa).detach()
         A_sa, v_target = self.est_adv(r, v, mask)
         if backward:
@@ -339,7 +333,7 @@ class PPO(object):
                 pickle.dump(best, f)
             return best
         
-        # 6. update dialog policy
+        # 5. update dialog policy
         for i in range(self.update_round):
 
             # 1. shuffle current batch
@@ -523,7 +517,6 @@ class PPO(object):
             os.makedirs(directory)
             
         if not rl_only:
-#            self.rewarder.save_auto(directory, epoch)
             self.rewarder.save_irl(directory, epoch)
 
         torch.save(self.value.state_dict(), directory + '/' + str(epoch) + '_ppo.val.mdl')
@@ -532,7 +525,6 @@ class PPO(object):
         logging.info('<<dialog policy>> epoch {}: saved network to mdl'.format(epoch))
 
     def load(self, filename):
-#        self.rewarder.load_auto(filename)
         self.rewarder.load_irl(filename)
         
         value_mdl = filename + '_ppo.val.mdl'

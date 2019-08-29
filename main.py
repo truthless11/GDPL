@@ -110,7 +110,7 @@ if __name__ == '__main__':
         agent = PPO(make_env, args, manager, config, args.process)
         best = agent.load(args.load)
         
-        # auto, irl, rl
+        # irl, rl
         for i in range(args.epoch):
             agent.update(args.batchsz_traj, i)
             # validation
