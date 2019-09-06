@@ -80,7 +80,7 @@ python main.py --pretrain True --save_dir model_agenda
 ### train
 
 ```
-python main.py --load model_agenda/best
+python main.py --load model_agenda/best --lr_rl 1e-4 --lr_irl 1e-4 --epoch 16
 ```
 **NOTE**: set ```--load_user``` when using *VHUS* as the simulator
 

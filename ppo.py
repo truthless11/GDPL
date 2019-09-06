@@ -489,9 +489,9 @@ class PPO(object):
             print('turn', turn)
             #print('reward', A_sa.tolist())
             print('reward', v_target[0].item())
-            match_session = self.evaluator.match_rate(s, False)
+            match_session = self.evaluator.match_rate(s, True)
             print('match', match_session)
-            inform_session = self.evaluator.inform_F1(s, False)
+            inform_session = self.evaluator.inform_F1(s, True)
             print('inform', inform_session)
             if (match_session == 1 and inform_session[1] == 1) \
             or (match_session == 1 and inform_session[1] is None) \
