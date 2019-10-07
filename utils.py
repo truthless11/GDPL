@@ -130,14 +130,8 @@ def state_vectorize(state, config, db, noisy=False):
     inform = np.zeros(len(config.inform_da))
     for domain in state['belief_state']['inform']:
         for slot, value in state['belief_state']['inform'][domain].items():
-            dom_slot, p = domain+'-'+slot+'-', 1
-            key = dom_slot + str(p)
-            while inform[config.inform2idx[key]]:
-                p += 1
-                key = dom_slot + str(p)
-                if key not in config.inform2idx:
-                    break
-            else:
+            key = domain+'-'+slot+'-1'
+            if key in config.inform2idx:
                 inform[config.inform2idx[key]] = 1.
             
     request = np.zeros(len(config.request_da))

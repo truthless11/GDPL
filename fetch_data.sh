@@ -1,3 +1,3 @@
 mkdir -p data
-wget --directory-prefix=data/ https://drive.google.com/open?id=14MaJFb_fWR_SUB9S0yOxLtkE1Coe3Zgu
+wget --directory-prefix=data/ https://drive.google.com/open?id=18TYwvoA1viGtOPbj-15KlGJYxXOjnhrr
 unzip data/GDPLdata.zip -d data/

@@ -14,7 +14,7 @@ Cite this paper :
 
 ## Data
 
-unzip [zip](https://drive.google.com/open?id=14MaJFb_fWR_SUB9S0yOxLtkE1Coe3Zgu) under `data` directory, or simply running
+unzip [zip](https://drive.google.com/open?id=18TYwvoA1viGtOPbj-15KlGJYxXOjnhrr) under `data` directory, or simply running
 
 ```
 sh fetch_data.sh
@@ -24,7 +24,13 @@ the pre-processed data are under `data/processed_data` directory
 
 - data preprocessing will be automatically done if `processed_data` directory does not exists when running `main.py`
 
+### Use
+
 the best trained model that interacts with `agenda` is under `data/agenda` directory
+
+```
+python main.py --test True --load data/agenda/best > result.txt
+```
 
 ## Run
 
