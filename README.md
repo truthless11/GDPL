@@ -7,7 +7,8 @@ Cite this paper :
 @inproceedings{takanobu2019guided,
   title={Guided Dialog Policy Learning: Reward Estimation for Multi-Domain Task-Oriented Dialog},
   author={Takanobu, Ryuichi and Zhu, Hanlin and Huang, Minlie},
-  booktitle={EMNLP-IJCNLP}
+  booktitle={EMNLP-IJCNLP},
+  pages={100--110},
   year={2019}
 }
 ```
