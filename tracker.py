@@ -86,17 +86,17 @@ class StateTracker(object):
                 entities = self.get_entities(s, domain)
                 
             da = '-'.join((domain, intent, slot, p))
-            if p == 'none':
-                s['sys_action'][da] = 'none'
-            elif p == '?':
-                s['sys_action'][da] = '?'
-            elif intent in ['nooffer', 'nobook']:
+            if intent in ['nooffer', 'nobook']:
                 if slot in s['belief_state']['inform'][_domain]:
                     s['sys_action'][da] = s['belief_state']['inform'][_domain][slot]
                 else:
                     s['sys_action'][da] = 'none'
             elif slot == 'choice':
                 s['sys_action'][da] = str(len(entities))
+            elif p == 'none':
+                s['sys_action'][da] = 'none'
+            elif p == '?':
+                s['sys_action'][da] = '?'
             else:
                 num = int(p) - 1
                 if len(entities) > num and slot in self.cfg.mapping[_domain]:
@@ -161,7 +161,7 @@ class StateTracker(object):
                 if slot in s['user_goal']['inform'][domain]:
                     s['user_action'][da] = s['user_goal']['inform'][domain][slot]
                 else:
-                    s['user_action'][da] = 'none'
+                    s['user_action'][da] = 'dont care'
             
             if slot != 'none':
                 if intent == 'inform':
@@ -169,7 +169,7 @@ class StateTracker(object):
                     if slot in s['user_goal']['inform'][domain]:
                         s['belief_state']['inform'][domain][slot] = s['user_goal']['inform'][domain][slot] # value
                     else:
-                        s['belief_state']['inform'][domain][slot] = 'none'
+                        s['belief_state']['inform'][domain][slot] = 'dont care'
                 
                 elif intent == 'request':
                     s['belief_state']['request'][domain].add(slot)
